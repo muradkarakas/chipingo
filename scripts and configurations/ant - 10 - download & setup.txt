@@ -1,0 +1,6 @@
+http://ant.apache.org/bindownload.cgi
+
+export ANT_HOME=/home/debian/apache-ant-1.9.4
+
+export PATH=$ANT_HOME/bin: ........
+

@@ -1,0 +1,9 @@
+install OpenSSL:  http://slproweb.com/products/Win32OpenSSL.html
+
+set OPENSSL_CONF=c:\OpenSSL-Win64\bin\openssl.cfg 
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mysitename.key -out mysitename.crt
+
+wamp configuration document: http://forum.wampserver.com/read.php?2,32986
+   
+

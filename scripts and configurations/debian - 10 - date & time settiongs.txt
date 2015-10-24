@@ -1,0 +1,4 @@
+su
+ 
+dpkg-reconfigure tzdata
+

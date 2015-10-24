@@ -1,0 +1,14 @@
+INSTALL SSH SERVER
+sudo aptitude update && sudo aptitude -f install openssh-client openssh-server
+
+PAROLASIZ DIGER BILGISAYARA SSH BAGLANTISI
+ssh-keygen -t rsa
+ssh debian@cassandra-node-2 mkdir -p .ssh
+cat .ssh/id_rsa.pub | ssh debian@cassandra-node-2 'cat >> .ssh/authorized_keys'
+ssh debian@cassandra-node-2 "chmod 700 .ssh; chmod 640 .ssh/authorized_keys"
+ssh debian@cassandra-node-2
+
+
+PAROLASIZ LOCAL BILGISAYARA SSH BAGLANTISI
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys

@@ -1,0 +1,311 @@
+http://localhost/chipingo/admin/config/chipingo/reinstall_drupal_cassandra
+
+
+            create keyspace if not exists drupal  
+            WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy','DC1' : 2 };
+            
+        
+            CREATE TABLE IF NOT EXISTS counters (  
+              key_column_name text,  
+              counter_value counter,  
+              PRIMARY KEY (key_column_name)  
+            );
+            
+            
+            CREATE TABLE IF NOT EXISTS users_by_uid (  
+               uid int,  
+               name text,  
+               pass text,  
+               mail text,  
+               theme text,  
+               signature text,  
+               signature_format text,  
+               created int,  
+               access int,  
+               login int,  
+               status int,  
+               timezone text,  
+               language text,  
+               picture int,  
+               init text,  
+               data blob,  
+               PRIMARY KEY (uid)  
+            );
+            
+            
+            CREATE TABLE IF NOT EXISTS users_by_name (  
+               name text,  
+               uid int,  
+               pass text,  
+               mail text,  
+               theme text,  
+               signature text,  
+               signature_format text,  
+               created int,  
+               access int,  
+               login int,  
+               status int,  
+               timezone text,  
+               language text,  
+               picture int,  
+               init text,  
+               data blob,  
+               PRIMARY KEY ( (name), status )   
+            );
+            
+            
+           CREATE TABLE IF NOT EXISTS users_by_mail (  
+               uid int,  
+               name text,  
+               pass text,  
+               mail text,  
+               theme text,  
+               signature text,  
+               signature_format text,  
+               created int,  
+               access int,  
+               login int,  
+               status int,  
+               timezone text,  
+               language text,  
+               picture int,  
+               init text,  
+               data blob,  
+               PRIMARY KEY (mail)   
+            ); 
+            
+            
+            CREATE TABLE IF NOT EXISTS role_by_name (  
+              name text,  
+              rid int,  
+              weight int,  
+              PRIMARY KEY (name)  
+            );
+            
+            
+            CREATE TABLE IF NOT EXISTS role_by_rid (  
+              rid int,  
+              name text,  
+              weight int,  
+              PRIMARY KEY (rid)  
+            );
+            
+            
+            CREATE TABLE IF NOT EXISTS users_roles (  
+               uid int,  
+               rid int,  
+               user_name text,  
+               role_name text,  
+               PRIMARY KEY ( (uid, rid) )   
+            );
+            
+            
+            CREATE TABLE IF NOT EXISTS role_permission (  
+              rid int,  
+              permission text,  
+              module text,  
+              PRIMARY KEY ((rid), permission)  
+            );
+            
+            
+            create table if not exists sessions_by_timestamp (  
+              uid	int,    //today_as_timestamp int,  
+              timestamp	int,  
+              sid	text,                        
+              hostname	text,              
+              cache	int,  
+              session	text,  
+              ssid	text,  
+              PRIMARY KEY ( (uid), timestamp, sid )  
+            );
+            
+            
+            create table if not exists sessions_by_sid_and_uid (  
+            sid	text,  
+            uid	int,              
+            hostname	text,  
+            timestamp	int,  
+            cache	int,  
+            session	text,  
+            ssid	text,  
+            PRIMARY KEY ( (sid), uid )  
+            ); 
+          
+            create index if not exists sessions_by_sid_and_uid_idx_uid on sessions_by_sid_and_uid(uid);
+            
+            create index if not exists users_roles_idx_uid on users_roles (uid);
+            
+            create index if not exists users_roles_idx_rid on users_roles (rid);
+            
+            
+            INSERT INTO role_permission (rid, permission, module) VALUES (1, 'access comments', 'comment'); 
+            INSERT INTO role_permission (rid, permission, module) VALUES (1, 'access content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (1, 'use text format filtered_html', 'filter');
+            INSERT INTO role_permission (rid, permission, module) VALUES (2, 'access comments', 'comment');
+            INSERT INTO role_permission (rid, permission, module) VALUES (2, 'access content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (2, 'post comments', 'comment');
+            INSERT INTO role_permission (rid, permission, module) VALUES (2, 'skip comment approval', 'comment');
+            INSERT INTO role_permission (rid, permission, module) VALUES (2, 'use text format filtered_html', 'filter');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access administration menu', 'admin_menu');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access administration pages', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access comments', 'comment');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access content overview', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access contextual links', 'contextual');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access dashboard', 'dashboard');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access devel information', 'devel');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access overlay', 'overlay');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access site in maintenance mode', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access site reports', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access site-wide contact form', 'contact');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access toolbar', 'toolbar');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access user contact forms', 'contact');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'access user profiles', 'user');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer actions', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer blocks', 'block');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer comments', 'comment');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer contact forms', 'contact');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer content translations', 'i18n_node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer content types', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer filters', 'filter');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer image styles', 'image');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer languages', 'locale');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer menu', 'menu');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer module filter', 'module_filter');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer modules', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer nodes', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer pathauto', 'pathauto');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer permissions', 'user');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer search', 'search');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer shortcuts', 'shortcut');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer site configuration', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer software updates', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer taxonomy', 'taxonomy');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer themes', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer url aliases', 'path');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'administer users', 'user');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'block IP addresses', 'system');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'bypass node access', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'cancel account', 'user');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'change own username', 'user');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'create article content', 'node'); 
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'create page content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'create url aliases', 'path');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'customize shortcut links', 'shortcut');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'delete any article content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'delete any page content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'delete own article content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'delete own page content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'delete revisions', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'delete terms in 1', 'taxonomy');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'display admin pages in another language', 'admin_language');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'display drupal links', 'admin_menu');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'edit any article content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'edit any page content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'edit own article content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'edit own comments', 'comment');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'edit own page content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'edit terms in 1', 'taxonomy');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'execute php code', 'devel');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'flush caches', 'admin_menu');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'notify of path changes', 'pathauto');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'post comments', 'comment');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'revert revisions', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'search content', 'search');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'select account cancellation method', 'user');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'skip comment approval', 'comment');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'switch shortcut sets', 'shortcut');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'switch users', 'devel');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'translate admin strings', 'i18n_string');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'translate content', 'translation');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'translate interface', 'locale');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'translate user-defined strings', 'i18n_string');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'use advanced search', 'search');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'use all enabled languages', 'admin_language');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'use ctools import', 'ctools');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'use text format filtered_html', 'filter');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'use text format full_html', 'filter');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'view own unpublished content', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'view revisions', 'node');
+            INSERT INTO role_permission (rid, permission, module) VALUES (3, 'view the administration theme', 'system');
+          
+          
+          insert into drupal.users_by_mail(uid, name, status, mail) values
+            (0, 'anonymous', 0, 'no mail');
+          insert into drupal.users_by_name(uid, name, status, mail) values
+            (0, 'anonymous', 0, 'no mail');            
+          insert into drupal.users_by_uid(uid, name, status, mail) values
+            (0, 'anonymous', 0, 'no mail');
+            
+         insert into drupal.users_by_mail(uid, name, pass, mail, signature_format,status,timezone,language,init) values
+            (1, 'admin', '$S$DZ8kRSxBXDkWeMSVvUKmlTEQiDp8OfBNldD4vENTIka/vruW5Fsh', 
+            	'muradkarakas@gmail.com',
+            	'filtered_html',
+            	1,
+            	'Europe/London',
+                             'en',
+                             'muradkarakas@gmail.com'
+            );   
+         insert into drupal.users_by_name(uid, name, pass, mail, signature_format,status,timezone,language,init) values
+            (1, 'admin', '$S$DZ8kRSxBXDkWeMSVvUKmlTEQiDp8OfBNldD4vENTIka/vruW5Fsh', 
+            	'muradkarakas@gmail.com',
+            	'filtered_html',
+            	1,
+            	'Europe/London',
+                             'en',
+                             'muradkarakas@gmail.com'
+            );               
+         insert into drupal.users_by_uid(uid, name, pass, mail, signature_format,status,timezone,language,init) values
+            (1, 'admin', '$S$DZ8kRSxBXDkWeMSVvUKmlTEQiDp8OfBNldD4vENTIka/vruW5Fsh', 
+            	'muradkarakas@gmail.com',
+            	'filtered_html',
+            	1,
+            	'Europe/London',
+                             'en',
+                             'muradkarakas@gmail.com'
+            );            
+           
+            INSERT INTO role_by_rid(rid,name,weight) VALUES (1,'anonymous user',0);
+			INSERT INTO role_by_rid(rid,name,weight) VALUES (2,'authenticated user',1);
+			INSERT INTO role_by_rid(rid,name,weight) VALUES (3,'administrator',3);
+            
+			INSERT INTO role_by_name(rid,name,weight) VALUES (1,'anonymous user',0);
+			INSERT INTO role_by_name(rid,name,weight) VALUES (2,'authenticated user',1);
+			INSERT INTO role_by_name(rid,name,weight) VALUES (3,'administrator',3);
+			
+			INSERT INTO users_roles(uid,rid,role_name,user_name) VALUES (1,3,'administrator','admin');
+
+			update drupal.counters
+            set counter_value = counter_value + 1
+            where key_column_name = 'user_role_id';
+			
+			update drupal.counters
+            set counter_value = counter_value + 1
+            where key_column_name = 'user_role_id';
+			
+			update drupal.counters
+            set counter_value = counter_value + 1
+            where key_column_name = 'user_role_id';
+			
+			update drupal.counters
+            set counter_value = counter_value + 1
+            where key_column_name = 'user_role_id';
+			
+			update drupal.counters
+            set counter_value = counter_value + 1
+            where key_column_name = 'user_id';
+			
+			update drupal.counters
+            set counter_value = counter_value + 1
+            where key_column_name = 'user_id';
+			
+			update drupal.counters
+            set counter_value = counter_value + 1
+            where key_column_name = 'user_id';
+			
+			update drupal.counters
+            set counter_value = counter_value + 1
+            where key_column_name = 'user_id';
+					   
+					   
+                            

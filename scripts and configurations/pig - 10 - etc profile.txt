@@ -1,0 +1,6 @@
+export PATH="/home/debian/pig-0.14.0/bin:$HADOOP_PREFIX/bin:$HADOOP_PREFIX/sbin:$ANT_HOME/bin:$JDK_HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin$
+
+export PIG_INITIAL_ADDRESS=cassandra-node-1
+export PIG_RPC_PORT=9160
+export PIG_PARTITIONER=org.apache.cassandra.dht.RandomPartitioner
+export PIG_HOME=/home/debian/pig-0.14.0

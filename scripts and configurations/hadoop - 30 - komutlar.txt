@@ -1,0 +1,7 @@
+
+
+SIRA ILE ÇALISTIRILACAK KOMUTLAR:
+hadoop-1.2.1/bin/hadoop namenode -format      # hadoop-1.2.1/bin/hdfs namenode -format       
+
+
+http://localhost:50070/

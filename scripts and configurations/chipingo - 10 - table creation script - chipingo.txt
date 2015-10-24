@@ -1,0 +1,133 @@
+http://localhost/chipingo/admin/config/chipingo/reinstall_drupal_cassandra
+                         
+                         
+                      
+          create keyspace if not exists chipingo  
+          WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy','DC1' : 2 };    
+       
+          
+          create table if not exists chipingo_by_chipingo (  
+              chipingo_email text,  
+              chipingo text, 
+			  publisher text,
+              user_id int,              
+              chipingo_status int,  
+              default_chipingo int,  
+              created int,  
+              changed int,  
+			  chipingo_logo_content blob,
+			  chipingo_logo_content_width int,
+			  chipingo_logo_content_height int,
+			  chipingo_logo_content_mime text,
+			  publisher_logo_content blob, 
+              primary key ( (chipingo_email), user_id )  
+            );
+            
+            create table if not exists chipingo_by_userid (  
+              user_id int,              
+              chipingo_email text,  
+              chipingo text,
+			  publisher text,
+              chipingo_status int,  
+              default_chipingo int,  
+              created int,  
+              changed int, 
+			  chipingo_logo_content blob,
+			  chipingo_logo_content_width int,
+			  chipingo_logo_content_height int,
+			  chipingo_logo_content_mime text,
+			  publisher_logo_content blob,
+              primary key ((user_id), chipingo_email)  
+            );
+            
+            create table if not exists qtag_by_chipingo (  
+              chipingo_email text,  
+              qtag text,             
+              user_id int,              
+              question text,  
+              changed int,  
+			  last_session_name_used text,
+              primary key ((chipingo_email), qtag)  
+            );
+            
+            create table if not exists qtag_by_uid (  
+              user_id int,       
+              chipingo_email text,  
+              qtag text,            
+              question text,  
+              changed int,  
+			  last_session_name_used text,
+              primary key ((user_id), chipingo_email, qtag )  
+            );
+            
+            create table if not exists session_by_chipingo_email (  
+             chipingo_email text,       
+             qtag text,  
+             session_name text,      
+             user_id int,  
+             publish_start_date int,  
+             publish_end_date int,  
+             session_status int,  
+             session_question_type int,  
+             session_option_type text,  
+             session_restriction_gender int,  
+             session_restriction_language int,  
+             session_restriction_country int,  
+             session_restriction_city int,  
+             session_restriction_ages int,              
+             primary key ( (chipingo_email), qtag, session_name )  
+            );
+            
+            
+                        
+            create table if not exists qtag_options (   
+             chipingo_email text,   
+             qtag text,   
+             session_name text,       
+             option_timestamp int,  
+             option text,  
+             user_id int,  
+             reply_count bigint,  
+			 option_owner_category text,
+             primary key ( (chipingo_email, qtag, session_name), option_timestamp)    
+            );
+            
+            create table if not exists qtag_replies_by_session (   
+             chipingo_email text,        
+             qtag text,       
+             session_name text,  
+             option_timestamp int, 
+             user_id int,  
+             primary key ( (chipingo_email, qtag, session_name, option_timestamp), user_id)  
+            );
+            
+			create table if not exists qtag_replies_by_user_id (   
+             user_id int,  
+             chipingo_email text,        
+             qtag text,       
+             session_name text,  
+             option_timestamp int, 
+             primary key ( (user_id), chipingo_email, qtag, session_name)  
+            );
+
+            
+            create table if not exists search_paths ( 
+              part text,	 
+              whole text,             
+              publish_end_date int, 
+              publish_start_date int,
+			  session_name text,  
+              qtag text,
+              primary key ((part), publish_end_date) 
+            ) with clustering order by (publish_end_date desc);
+            
+	
+	create index if not exists search_paths_whole on search_paths(whole) ;
+	
+	create table if not exists user_favorites_by_user_id (  
+              user_id int,  
+              chipingo_email text,  
+              primary key ((user_id), chipingo_email) 
+            );
+			
+			

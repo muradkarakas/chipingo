@@ -1,0 +1,2 @@
+etc/hadoop/hadoop-env.sh:
+	export JAVA_HOME=/home/debian/jdk1.8.0_45
