@@ -1,0 +1,329 @@
+<?php
+
+
+/*
+
+CASSANDRA table definition
+  
+create table chipingo.publisher_chipingo (
+	chipingo text,
+	owner_id bigint,
+	chipingo_status int,
+	default_chipingo text,
+	created bigint,
+	changed bigint,
+	primary key (chipingo)	
+);
+
+
+create table chipingo.users (
+	logon_name	text,
+	drupal_user_id bigint,
+	user_name	text,
+	user_surname text,
+	created bigint,
+	changed bigint,
+	
+	primary key (logon_name)
+);
+
+  
+*/
+
+
+
+
+
+/** 
+*    Implement hook_install
+*    This hook implementation does
+*    1. add foreign keys to the database tables
+*    2. add a menu link to drupal user menu
+*/ 
+/*
+function chipingo_install() {
+	// `qtag`.
+	Database::getConnection()->query( 'ALTER TABLE `qtag` ADD FULLTEXT(`question`)' );
+	Database::getConnection()->query( 'ALTER TABLE `qtag_sessions` ADD CONSTRAINT `ref_qtag_id` FOREIGN KEY (`qtag_id`) REFERENCES `qtag`(`qtag_id`) ON DELETE CASCADE ON UPDATE RESTRICT' );
+	Database::getConnection()->query( 'ALTER TABLE `qtag` ADD CONSTRAINT `ref_chipingo_id` FOREIGN KEY (`chipingo_id`) REFERENCES `qtag_chipingo`(`chipingo_id`) ON DELETE CASCADE ON UPDATE RESTRICT' );
+	Database::getConnection()->query( 'CREATE TRIGGER `qtag_chipingo_before_insert` BEFORE INSERT ON `qtag_chipingo` FOR EACH ROW BEGIN IF NEW.chipingo = \'\' THEN SET NEW.chipingo = NULL; END IF; IF NEW.publisher = \'\' THEN SET NEW.publisher = NULL; END IF; END;' );
+}
+*/
+
+
+/**
+*   This function is used to update fields of desired table.
+*   Common database tables are added to the fields array
+*/
+function addDefaultFields( &$dest ) {
+	
+	$default_fields = array();
+	$default_fields['created'] = array(
+		'description' => 'The Unix timestamp when the qtag was created.',
+		'type' => 'int',
+		'not null' => TRUE,
+		'default' => 0,
+	);
+	$default_fields['changed'] = array(
+		'description' => 'The Unix timestamp when the qtag was most recently saved.',
+		'type' => 'int',
+		'not null' => TRUE,
+		'default' => 0,
+	);
+	
+	foreach( $default_fields as $key => $value ) {
+			$dest[$key] = $value;
+	}
+}
+
+/** 
+*    Implement hook_schema
+*/ 
+function chipingo_schema() {
+
+	$schema = array();
+	/*
+	$schema['qtag_channels'] = array(	
+		'description' => 'Table for channels',
+		'fields' => array(
+			'channel_id' => array(
+				'description' => 'Channel Id',
+				'type' => 'serial',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),
+			'user_id' => array(
+				'description' => 'User Id',
+				'type' => 'int',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),
+			'company_name' => array(
+				'description' => 'Company Name',
+				'type' => 'varchar',
+				'length' => '50',
+				'not null' => TRUE,
+			),
+			'channel_name' => array(
+				'description' => 'Channel Name',
+				'type' => 'varchar',
+				'length' => '50',
+				'not null' => TRUE,
+			),			
+		),
+		'primary key' => array('channel_id'),
+		'mysql_engine' => 'InnoDB',
+		'collation' => 'utf8_unicode_ci',
+		'mysql_character_set' => 'utf8',
+		'unique keys' => array(
+			'uk1' => array('user_id','company_name','channel_name')
+		)
+	);
+	addDefaultFields( $schema['qtag_channels']['fields'] );
+	*/
+	
+	$schema['qtag_sessions'] = array(	
+		'description' => 'Session information of each unique questionnaire',
+		'fields' => array(
+			'session_id' => array(
+				'description' => 'Session Id',
+				'type' => 'serial',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),
+			'session_name' => array(
+				'description' => 'Session Name',
+				'length' => 25,
+				'type' => 'varchar',
+				'not null' => TRUE
+			),
+			'qtag_id' => array(
+				'description' => 'QTag Id',
+				'type' => 'int',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),
+			'chipingo_id' => array(
+				'description' => 'QTag\'s chipingo Id. This id is added to this table for fast access. No need to join with qtag table.',
+				'type' => 'int',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),
+			'user_id' => array(
+				'description' => 'User Id',
+				'type' => 'int',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),
+			'publish_start_date' => array(
+				'description' => 'Questionnaire start date',
+				'type' => 'int',
+				'not null' => FALSE,
+			),
+			'publish_end_date' => array(
+				'description' => 'Questionnaire end date',
+				'type' => 'int',
+				'not null' => FALSE,
+			),
+			'session_status' => array(
+				'description' => '0=>Open, 1=>Published, 2=>Banned',
+				'type' => 'int',
+				'not null' => TRUE,
+				'default' => 0
+			),
+			'session_question_type' => array(
+				'description' => '0->Normal, 1->Race',
+				'type' => 'int',
+				'not null' => TRUE,
+				'default' => 0
+			),
+			'session_option_type' => array(
+				'description' => '0->Strict, 1->Free, 2->Restricted',
+				'type' => 'int',
+				'not null' => TRUE,
+				'default' => 0
+			),
+			'session_restriction_gender' => array(
+				'description' => '0=>No Restriction, 1=>Male, 2=>Female, 3=>Other',
+				'type' => 'int',
+				'not null' => TRUE,
+				'default' => 0
+			),
+			'session_restriction_language' => array(
+				'description' => '0=>No Restriction, 1=>Apply Language Restriction',
+				'type' => 'varchar',
+				'length' => 5,
+				'not null' => TRUE,
+				'default' => '0'
+			),
+			'session_restriction_country' => array(
+				'description' => '0=>No Restriction, 1=>Apply Country Restriction',
+				'type' => 'varchar',
+				'length' => 5,
+				'not null' => TRUE,
+				'default' => '0'
+			),
+			'session_restriction_city' => array(
+				'description' => '0=>No Restriction, 1=>Apply City Restriction',
+				'type' => 'varchar',
+				'length' => 15,
+				'not null' => TRUE,
+				'default' => '0'
+			),
+			'session_restriction_ages' => array(
+				'description' => '0=>No Restriction, 1=>Teenage, 2=>Adult, 3=>Senior',
+				'type' => 'int',
+				'not null' => TRUE,
+				'default' => 0
+			),
+		),
+		'primary key' => array('session_id'),
+		'mysql_engine' => 'InnoDB',
+		'collation' => 'utf8_unicode_ci',
+		'mysql_character_set' => 'utf8',
+		'unique keys' => array(
+			'ux_sesname_qtagid' => array('qtag_id', 'session_name')
+		),
+	);
+	addDefaultFields( $schema['qtag_sessions']['fields'] );
+	
+	$schema['qtag'] = array(	
+	  'description' => 'Table for questions and its options',
+	  'fields' => array(
+			'qtag_id' => array(
+				'description' => 'QTag Id',
+				'type' => 'serial',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),
+			'qtag' => array(
+				'description' => 'QTag of the question',
+				'type' => 'varchar',
+				'length' => '100',
+				'not null' => TRUE,
+			),
+			'question' => array(
+				'description' => 'Question',
+				'type' => 'varchar',
+				'length' => '100',
+				'not null' => TRUE,
+			),
+			'chipingo_id' => array(
+				'description' => 'Chipingo Id',
+				'type' => 'int',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),
+			'user_id' => array(
+				'description' => 'User Id',
+				'type' => 'int',
+				'unsigned' => TRUE,
+				'not null' => TRUE
+			),			
+		),
+		'primary key' => array('qtag_id'),
+		'mysql_engine' => 'InnoDB',
+		'collation' => 'utf8_unicode_ci',
+		'mysql_character_set' => 'utf8',
+		'indexes' => array(
+			'idx_chipingo_id' => array('chipingo_id'),
+		),
+		'unique keys' => array(
+			'qtag' => array('qtag')
+		)
+	);
+	addDefaultFields( $schema['qtag']['fields'] );
+	
+	$schema['qtag_chipingo'] = array(
+		'description' => 'Stores publisher and chipingo information',
+		'fields' => array(
+			'chipingo_id' => array(
+			  'description' => 'Chipingo id',
+			  'type' => 'serial',
+			  'unsigned' => TRUE,
+			  'not null' => TRUE,
+			),
+			'chipingo' => array(
+			  'description' => 'Chipingo or email',
+			  'type' => 'varchar',
+			  'length' => '50',
+			  'not null' => TRUE,
+			),
+			'publisher' => array(
+			  'description' => 'Publisher name or domain name',
+			  'type' => 'varchar',
+			  'length' => '50',
+			  'not null' => TRUE,
+			),
+			'user_id' => array(
+			  'description' => 'Owner of the record',
+			  'type' => 'int',
+			  'not null' => TRUE,
+			),
+			'chipingo_status' => array(
+			  'description' => 'If publisher and chipingo seems to be an e-mail address, it should be validated. 0=>Not an e-mail, 1=>Not Validated, 2=>Validated',
+			  'type' => 'int',
+			  'not null' => TRUE,
+			  'default' => 0,
+			),
+			'default_chipingo' => array(
+			  'description' => 'whether this is a default publisher and chipingo e-mail or not. "N"=>Not Default, "Y"=>Default',
+			  'type' => 'varchar',
+			  'length' => 1,
+			  'not null' => TRUE,
+			  'default' => 'N',
+			),
+		  ),
+		'primary key' => array( 'chipingo_id' ), 		
+		'mysql_engine' => 'InnoDB',
+		'collation' => 'utf8_unicode_ci',
+		'mysql_character_set' => 'utf8',
+		'unique keys' => array(
+			'qtag_chipingo_uk1' => array('publisher', 'chipingo')
+		)
+	);
+	addDefaultFields( $schema['qtag_chipingo']['fields'] );
+	
+	return $schema;
+}
+

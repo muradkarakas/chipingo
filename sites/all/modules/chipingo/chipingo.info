@@ -1,0 +1,22 @@
+name = ChipInGo Module
+description = Defines ChipInGo entities and blocks
+core = 7.x
+
+package = ChipInGo
+
+stylesheets[all][] = css/font-awesome.min.css
+stylesheets[all][] = css/chipingo.css
+stylesheets[all][] = css/jquery-ui.css
+stylesheets[all][] = css/freeow/freeow.css
+
+
+dependencies[] = jquery_update
+dependencies[] = i18n
+dependencies[] = transliteration
+dependencies[] = variable
+dependencies[] = ctools
+dependencies[] = l10n_update
+dependencies[] = admin_language
+dependencies[] = admin_menu
+dependencies[] = variable
+

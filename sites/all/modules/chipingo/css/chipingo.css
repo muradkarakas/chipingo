@@ -1,0 +1,311 @@
+/*
+*  FONT DECLERATION
+*/ 
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url('../fonts/SourceSansPro/SourceSansPro-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+*    OVERRIDES
+*/ 
+
+body {
+    font-size: 14px !important;
+    font-family: SourceSansPro !important;
+    background-image: url("/chipingo/sites/all/themes/chipingo/bg.png");
+    background-position: center top;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+ul.secondary {
+    border-bottom: 0px !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+ul.secondary li {
+    border: 0px !important;
+    padding: 0px !important;
+}
+
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  margin-left: 0px !important;
+}
+
+/* NAVIGATION BAR  */
+.navbar-default {
+    background-color: #38342B !important;
+}
+
+.navbar.container {
+    border-radius: 10px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: white !important;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: white !important;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #555555;
+  background-color: red !important;
+}
+
+// *********************************************
+// *********************************************
+// *********************************************
+
+
+.sub {
+	padding-left: 51px;
+	display: none;
+}
+
+.accordion {
+	//font-family: 'Open Sans', Arial, Helvetica, Sans-serif, Verdana, Tahoma;
+	width: 100%;
+	//max-width: 360px;
+	background: #FFF;
+	//font-size: 12px;
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.accordion ul { 
+	list-style-type: none; 
+}
+
+.accordion a {
+  //color: #b63b4d;  // red
+  color: #5570B3;
+  text-decoration: none;
+}
+
+.accordion h1 {
+  color: #FFF;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 80px;
+}
+
+.accordion h1 a {
+  color: #c12c42;
+}
+
+.accordion .link {
+  cursor: pointer;
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #4D4D4D;
+  font-weight: 700;
+  border-bottom: 1px solid #CCC;
+  position: relative;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+
+.accordion li:last-child .link { 
+	border-bottom: 0; 
+}
+
+.accordion li i {
+	//font-size:12px;
+	margin-right: 5px;	
+	color: #595959;
+	margin-top: 0px !important;
+}
+
+.accordion li i.fa-chevron-down {
+	//right: 12px;
+	float: right;
+	margin-top: 7px;
+}
+
+.accordion li.murad i.fa-chevron-down[murad] {
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+	float: right;
+}
+
+.accordion li.ozgul i.fa-chevron-down[ozgul] {
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+	float: right;
+}
+
+.accordion li.murad .link { 
+	color: #b63b4d; 
+}
+
+.accordion li.murad i { 
+	color: #b63b4d; 
+}
+
+.submenu {
+	display: none;
+	padding-left: 26px;
+}
+
+.submenu li { 
+	//border-bottom: 1px solid #BAB0B0; 
+	//left: -7px;
+	//position: relative;
+}
+
+.submenu a {
+  display: block;
+  text-decoration: none;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  -webkit-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.submenu a:hover {
+  background: #b63b4d;
+  color: #FFF;
+}
+
+.accordion .sublink {
+  cursor: pointer;
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #4D4D4D;
+  font-weight: 700;
+  //border-bottom: 1px solid #CCC;
+  position: relative;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.accordion li.ozgul .sublink { 
+	color: green; 
+}
+
+/*
+* **************************************************************************************************
+*/
+
+.publisher-image {
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  border-bottom: 1px solid #BAB0B0;
+  border-right: 1px solid #BAB080;
+  width:30px;
+  height:30px;
+}
+
+.chipingo-image-large {
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  border-bottom: 1px solid #BAB0B0;
+  border-right: 1px solid #BAB080;
+  //width:auto;
+  //height:auto;
+}
+
+.chipingo-image-small {
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  border-bottom: 1px solid #BAB0B0;
+  border-right: 1px solid #BAB080;
+  width:60px;
+  height:30px;
+}
+
+.chipingo-block {
+  //font-size: 12px !important;
+  padding: 10px !important;
+  margin: 5px !important;
+  background-color: #FDFDFD;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;	
+  border-bottom: 2px solid #BAB0B0;
+  border-right: 2px solid #BAB080;
+  min-width: 230px !important;
+}
+
+.chipingo-block i {
+	//font-size: 12px !important;
+}
+
+.chipingo-block-header {
+	text-align: center;
+	border-bottom: 1px solid #BAB0B0;
+	border-right: 1px solid #BAB080;
+	border-radius: 5px;
+	//font-family: Verdana,Arial,Helvetica,sans-serif;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+        background-color: #38342B; //rgb(232, 229, 229);
+        color: white;
+}
+
+.chipingo-block-body {
+	border: 1px solid #BAB080;
+	border-radius: 5px;
+	padding: 15px;
+}
+
+.chipingo-radius {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}	
+
+.chipingo-div {
+	margin: 0px;  
+	//font-family: Verdana,Arial,Helvetica,sans-serif !important;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.option-bar-graph {
+  width: 500px;
+}
+
+.option-bar-graph-left {
+  background-color: graytext !important;
+  width: 25%;  
+  border: 2px solid gray;
+  text-align: left;
+  color: white;
+}
+
+.option-bar-graph-right {
+  background-color: whitesmoke !important;
+  width: 75%; 
+  padding-left: 10px;
+}
+

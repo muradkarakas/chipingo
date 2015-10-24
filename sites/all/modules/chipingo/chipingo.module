@@ -1,0 +1,567 @@
+<?php
+
+/*
+ * TODO mk050 session ekleme ve basit/advance mode ile çalışma
+ * TODO mk010 yayinlanmadigi halde kisinin abone olduğu chipingolarin soruları goruntuleniyor
+ * TODO mk010 ilk XX doğru bilen tipli sorular
+ * TODO mk099 chipingoların eposta adreslerinin valide edilmesi
+ * TODO mk050 user module'unde session bilgilerinin local mysql tablosuna yazılmasını sağla
+ * TODO mk099 terminoloji
+ * TODO mk022 captcha kullan (ilerideki satırlarda olan diğer bir husus: Kullanıcıları telefon numaralarına göndereceğimiz sms mesajı ile verify edelim)
+ * TODO mk040 içerik filtreleme özellikleri ekle (günvenlik ve hakaret/küfür içeren metinler)
+ *            "Report" butonu ile içerikler kullanıcılar tarafından rapor edilebilsin
+ *            Cross-site scripting olayına dikkat et
+ *            http://www.webpurify.com/ ve http://www.purgomalum.com/ sitelerini incele
+ *            Belli bir yayıncıya ait sorular fazla miktarda raporlanıyorsa kullanıcıyı kısıtlamak bir seçenek olabilir
+ *            Bu adreste beşyüz küsür kelimelik ingilizce bir liste var https://github.com/ronidavelman/Profanity-Checker/blob/master/db.js
+ *            Kullanıcıları telefon numaralarına göndereceğimiz sms mesajı ile verify edelim
+ * TODO mk020 üyelerin detaylı profil bilgilerinin giriş ekranı yap
+ *      ilk bilen xx kişiyi profil bilgileri girişine zorla
+ *      xx adet soru sonrasında kişiyi profil bilgileri girişine zorla
+ *      ekstra opsiyon girişi için kişinin profil bilgilerini iste
+ */
+module_load_include( 'php', 'chipingo', 'cassandra/php-cassandra_includes' );
+module_load_include( 'inc', 'chipingo', 'chipingo_library' );
+module_load_include( 'inc', 'chipingo', 'chipingo_utils' );
+module_load_include( 'php', 'chipingo', 'chipingo_exception' );
+
+// MENU ITEMS & FORMS
+module_load_include( 'php', 'chipingo', 'menus_and_forms/content/subscriptions/menu_items' );
+module_load_include( 'php', 'chipingo', 'menus_and_forms/content/chipingo/menu_items' );
+module_load_include( 'php', 'chipingo', 'menus_and_forms/content/qtag/menu_items' );
+module_load_include( 'php', 'chipingo', 'menus_and_forms/content/session/detail_panel/block_forms' );
+
+module_load_include( 'php', 'chipingo', 'menus_and_forms/configuration/menu_items' );
+
+// BLOCK FORMS
+module_load_include( 'php', 'chipingo', 'menus_and_forms/sidebar/qtag_session_list/menu_items' );
+module_load_include( 'php', 'chipingo', 'menus_and_forms/sidebar/qtag_session_list/block_form' );
+module_load_include( 'php', 'chipingo', 'menus_and_forms/sidebar/quick_chipingo_list/block_form' );
+module_load_include( 'php', 'chipingo', 'menus_and_forms/header/search/menu_items' );
+module_load_include( 'php', 'chipingo', 'menus_and_forms/header/search/block_forms' );
+include_once 'C:\\Calismalarim\\wamp\\www\\chipingo\\chipingo_mobile\\server\\gcm.php';
+
+/**
+*
+*/
+function chipingo_menu() {
+	
+	$items =  search_menu_items() +
+            subscriptions_menu_items() +
+            qtag_menu_items() +
+            chipingo_menu_items() +   
+            session_menu_items() +
+            configuration_menu_items();
+  
+  $items['upload_publisher_logo_image_file'] = array(
+    'title' => t('Upload Publisher Logo Image File'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array( 'upload_publisher_logo_form', 1 ),
+    'description' => t('Upload Publisher Logo Image File'),
+    'access callback' => TRUE,
+    'menu_name' => 'test', //ChipInGoConstants::$MENU_NAME,
+    'access callback' => 'chipingo_access',
+    'access arguments' => ['publisher_logo'],
+  );
+  
+  $items['upload_chipingo_logo_image_file'] = array(
+    'title' => t('Upload Publisher Logo Image File'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array( 'upload_chipingo_logo_form', 1 ),
+    'description' => t('Upload Chipingo Logo Image File'),
+    'access callback' => TRUE,
+    'menu_name' => 'test', //ChipInGoConstants::$MENU_NAME,
+    'access callback' => 'chipingo_access',
+    'access arguments' => ['publisher_logo'],
+  );
+  /*
+  $items['switch_view_mode'] = array(
+    'title' => t('Switch to Advanced View'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('switch_view_mode'),
+    'description' => t('Upload Publisher Logo Image File'),
+    'access callback' => TRUE,
+    'menu_name' => ChipInGoConstants::$MENU_NAME,
+    'access callback' => 'chipingo_access',
+    'access arguments' => ['switch_user_wiev_mode'],
+  );  
+  $items['jsonptest'] = array(
+    'title' => t('ajax text'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array( 'ajax_test_form' ),
+    'description' => t('Ajax test'),
+    'access callback' => TRUE,
+    'menu_name' => 'test', //ChipInGoConstants::$MENU_NAME,
+    'access callback' => 'chipingo_access',
+    'access arguments' => ['publisher_logo'],
+  );
+  */  
+	return $items;
+}
+
+
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @return type
+ */
+function ajax_test_form($form, &$form_state) {
+    
+  $form['submit-button'] = [
+    '#type' => 'submit',
+    //'#id' => 'new-button1',
+    '#default_value' => 'Click here and replace i am 1',
+    '#ajax' => [
+        'callback' => 'ajax_test_form_callback1',
+        'wrapper' => 'replace_div1'
+    ],
+  ];
+  
+  $form['replace_div1'] = [
+    '#markup' => '<div id="replace_div1">i am 1</div>',
+  ];
+  $form['replace_div-enter'] = [
+    '#markup' => '<br><br>',
+  ];
+  $form['replace_div2'] = [
+    '#markup' => '<div id="replace_div2">i am 2</div>',
+  ];
+  return $form;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @return type
+ */
+function ajax_test_form_callback1($form, &$form_state) {
+  
+  
+   /*
+  // Generate the settings:
+  $settings = FALSE;
+  $javascript = drupal_add_js(NULL, NULL);
+  if(isset($javascript['settings'], $javascript['settings']['data']))
+  {
+    $settings = '<script type="text/javascript">jQuery.extend(Drupal.settings, ';
+    $settings .= drupal_json_encode(call_user_func_array('array_merge_recursive', $javascript['settings']['data']));
+    $settings .=  ');</script>';
+  }*/
+
+  // Return the rendered form and the settings
+  return drupal_render( drupal_get_form('publisher_chipingo_settings_block_form_wrapper') );// . $settings;
+  /*
+  $newform['new-button'] = [
+    '#type' => 'submit',
+    //'#id' => 'new-button2',
+    '#default_value' => 'Click here and replace i am 2',
+    '#ajax' => [
+        'callback' => 'ajax_test_form_callback2',
+    ], 
+  ];
+  /*
+  $commands[] = array(
+    'command' => 'insert',
+    'method' => 'replaceWith',
+    'selector' => '#replace_div1',
+    'data' => ,
+  );
+  
+  $page = array(
+    '#type' => 'ajax',
+    '#commands' => $commands,
+  );
+  
+  return $newform;*/
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @return string
+ */
+function ajax_test_form_callback2($form, &$form_state) {
+  /*$commands[] = array(
+    'command' => 'alert',
+    'text' => 'Selam from callback2'
+  );
+  $page = array(
+    '#type' => 'ajax',
+    '#commands' => $commands,
+  );
+  */
+  $form['new-button'] = [
+    '#type' => 'submit',
+    //'#id' => 'new-button2',
+    '#default_value' => 'Click here and replace i am 2',
+    '#ajax' => [
+        'callback' => 'ajax_test_form_callback3',
+        'wrapper' => 'replace_div2'
+    ], 
+  ];
+  
+  return $form;
+}
+
+function ajax_test_form_callback3($form, &$form_state) {
+ 
+   /*
+  // Generate the settings:
+  $settings = FALSE;
+  $javascript = drupal_add_js(NULL, NULL);
+  if(isset($javascript['settings'], $javascript['settings']['data']))
+  {
+    $settings = '<script type="text/javascript">jQuery.extend(Drupal.settings, ';
+    $settings .= drupal_json_encode(call_user_func_array('array_merge_recursive', $javascript['settings']['data']));
+    $settings .=  ');</script>';
+  }
+*/
+  // Return the rendered form and the settings
+  return drupal_render( drupal_get_form('ajax_test_form_callback4') );// . $settings;
+}
+
+
+function ajax_test_form_callback4($form, &$form_state) {
+  $form['new-button'] = [
+    '#markup' => 'success',
+  ];
+  
+  return $form;
+}
+
+
+/*
+function chipingo_preprocess_page(&$vars){   
+  drupal_add_library('system', 'drupal.ajax');
+  drupal_add_library('system', 'drupal.form');
+  drupal_add_js(drupal_get_path('module','chipingo').'/js/chipingo.js', 'file');
+}*/
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @param type $chipingo_email
+ * @return type
+ */
+function upload_chipingo_logo_form($form, &$form_state, $chipingo_email) {
+  $form['image_example_image_fid'] = array(
+    '#title' => t('Upload ChipInGo Image'),
+    '#type' => 'managed_file',
+    '#description' => t('Upload ChipInGo Image'),
+    '#default_value' => variable_get('image_example_image_fid', ''),
+    '#upload_location' => 'public://chipingo_logo_images/',
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      // Pass the maximum file size in bytes
+      'file_validate_size' => array(500*1024), // max 500kb
+    ),
+  );
+  
+  if (isset($form_state['values']['image_example_image_fid'])) {
+    $result = db_select('file_managed', 'c')
+      ->fields('c', ['filename'])
+      ->condition('fid', $form_state['values']['image_example_image_fid'])
+      ->execute()
+      ->fetchAssoc();
+    
+    $fullpath = $_SERVER['DOCUMENT_ROOT'] . 
+        'chipingo\\sites\\default\\files\\chipingo_logo_images\\' . 
+        $result['filename'];
+    $conn = Cassandra::initializeCassandraSystem();  
+    $ChipingoTable = new ChipingoTable($conn);
+    $ChipingoTable->writeChipingoLogo($chipingo_email, $fullpath, $GLOBALS['user']->uid);
+    Cassandra::disConnect($conn);
+  }
+  //
+  return $form;
+}
+
+/**
+ * 
+ * @param type $form
+ * @param type $form_state
+ * @param type $chipingo_email
+ * @return type
+ */
+function upload_publisher_logo_form($form, &$form_state, $chipingo_email) {
+  $form['image_example_image_fid'] = array(
+    '#title' => t('Image'),
+    '#type' => 'managed_file',
+    '#description' => t('The uploaded image will be displayed on this page using the image style choosen below.'),
+    '#default_value' => variable_get('image_example_image_fid', ''),
+    '#upload_location' => 'public://publisher_logo_images/',
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('gif png jpg jpeg'),
+      // Pass the maximum file size in bytes
+      'file_validate_size' => array(50*1024), // max 50 kb
+    ),
+  );
+  
+  if (isset($form_state['values']['image_example_image_fid'])) {
+    $result = db_select('file_managed', 'c')
+      ->fields('c', ['filename'])
+      ->condition('fid', $form_state['values']['image_example_image_fid'])
+      ->execute()
+      ->fetchAssoc();
+    
+    $fullpath = $_SERVER['DOCUMENT_ROOT'] . 
+        'chipingo\\sites\\default\\files\\publisher_logo_images\\' . 
+        $result['filename'];
+    $conn = Cassandra::initializeCassandraSystem();  
+    $ChipingoTable = new ChipingoTable($conn);
+    $ChipingoTable->writePublisherLogo($chipingo_email, $fullpath, $GLOBALS['user']->uid);
+    Cassandra::disConnect($conn);
+  }
+  //
+  return $form;
+}
+
+
+
+/**
+ * 
+ * @param type $chipingo_email
+ *//*
+function chipingo_show_publisher_logo($chipingo_email) {
+  $conn = Cassandra::initializeCassandraSystem();  
+  $ChipingoTable = new ChipingoTable($conn);
+ 
+  $result = $ChipingoTable->readLogo($chipingo_email);
+  $content = hex2bin($result['logo_content']);
+  Cassandra::disConnect($conn);
+
+  //header("Content-type: image/png");
+  //print $content;
+  return $content;
+}*/
+
+/**
+ * 
+ * @param type $edit
+ * @param type $account
+ */
+function chipingo_user_login(&$edit, $account) {
+	$_SESSION['user_view_mode'] = 'A';
+  drupal_set_message(t('In Simple View now'));
+}
+
+/**
+*
+*/
+function chipingo_user_delete($account) {
+
+}
+
+/**
+*
+*/
+function chipingo_user_insert(&$edit, $account, $category) {
+  if ( $account->is_new ) {	  
+    $email_chipingo = explode('@', $account->mail);
+    $conn = Cassandra::initializeCassandraSystem();
+    $ChipingoTable = new ChipingoTable($conn);
+    $ChipingoTable->db_insert_all( 
+        [ 'chipingo_email' => $account->mail, 
+          'chipingo' => $email_chipingo[0], 
+          'publisher' => $email_chipingo[0], 
+          'user_id' => $account->uid,
+          'default_chipingo' => (int) 1,
+          'chipingo_status' => (int) 2
+        ]
+    );
+    Cassandra::disConnect($conn);
+	}
+}
+
+
+/**
+ * 
+ */
+function chipingo_access( $caller ) {
+  
+  if ( $GLOBALS['user']->uid > 0) {
+    return TRUE;
+  }
+  else {
+    //drupal_set_message( 'Item securied : ' . $caller . ', User: ' . $GLOBALS['user']->uid );
+    return FALSE;
+  }
+  
+}
+
+
+/**
+*  User's chipingos block info
+*/
+function chipingo_block_info() {
+	
+  $blocks['chipingo-search-block'] = [
+    'info' => t('ChipInGo Search Block'),
+    'status' => TRUE,
+    'region' => 'sidebar_first',
+    'weight' => 0,
+    'visibility' => 0,
+  ];
+  
+  $blocks['qtag_session_detail_panel'] = [
+    'info' => t('QTag Session Detail Panel'),
+    'status' => TRUE,
+    'region' => 'content',
+    'weight' => 200,
+    'visibility' => 0,
+  ];
+	
+  $blocks['content-ajax-div'] = [
+    'info' => t('ChipInGo Content Ajax Region'),
+    'status' => TRUE,
+    'region' => 'content',
+    'weight' => 100,
+    'visibility' => 0,
+  ];
+  
+  $blocks['quick_chipingo_list'] = [
+    'info' => t('Quick ChipInGo & QTags List'),
+    'status' => TRUE,
+    'region' => 'sidebar_first',
+    'weight' => 100,
+    'visibility' => 0,
+  ];
+	
+	$blocks['quick_session_list'] = [
+    'info' => t('QTag Session List'),
+    'status' => TRUE,
+    'region' => 'sidebar_first',
+    'weight' => 200,
+    'visibility' => 0,
+  ];
+  
+	return $blocks;
+}
+
+
+/**
+ * Implementation of hook_block_view().
+ */
+function chipingo_block_view($delta = '') {
+  
+	$block = array();
+	
+	switch( $delta ) {
+    
+    case 'content-ajax-div':      
+      $block['content'] = '<div id="content-ajax-div"></div>';    
+      break;
+    
+    case 'quick_session_list': 
+      
+      if ( chipingo_access( 'quick_session_list' ) ) {
+        $block['content'] = drupal_get_form('quick_session_list_form');
+      }
+      break;
+      
+    case 'qtag_session_detail_panel':
+      if ( chipingo_access( 'qtag_session_detail_panel' ) ) {
+        $block['content'] = drupal_get_form('session_detail_panel_form');
+      }
+      break;
+    
+    case 'chipingo-search-block':
+      if ( chipingo_access( 'chipingo_search_form' ) ) {
+        $block['content'] = drupal_get_form( 'chipingo_search_form');
+      }
+      break;
+    
+    case 'quick_chipingo_list':      
+      if ( chipingo_access( 'quick_chipingo_list' ) ) {
+        $block['content'] = drupal_get_form( 'quick_chipingo_list_form');
+      }      
+      break;      
+  }  
+	return $block;
+}
+
+
+
+
+
+/**
+*  After executing;
+*  1. User view mode change user menu link object object will be in $_SESSION["user_link_item_switch_item"]
+*  2. Active view mode will be changed every time when this function is called and new
+*		   mode will be in $_SESSION["user_view_mode"]
+*				S -> Simple view
+*				A -> Advanced view
+*
+*  @return
+*		Message to show user (success or fail)
+*/
+function user_link_item_switch_view_mode() {	
+	if ( !isset($_SESSION["user_link_item_switch_item"]) ) {
+		 $result = db_select( 'menu_links', 'm' )
+				->fields('m')
+				->condition( 'link_path', 'switch_view_mode' )
+				->execute()
+				->fetchAssoc();
+		$_SESSION["user_link_item_switch_item"] = menu_link_load( $result['mlid'] );
+	}			
+	if ( isset($_SESSION["user_view_mode"]) && $_SESSION["user_view_mode"] == 'S' )
+       $_SESSION["user_view_mode"] = 'A';
+	else $_SESSION["user_view_mode"] = 'S';	
+	$menu_title = ($_SESSION["user_view_mode"] == 'S') ? t('Switch to Advanced View') : t('Switch to Simple View');
+	$menu_title_message = ($_SESSION["user_view_mode"] == 'S') ? t('In Simple View now') : t('In Advanced View now');	
+	$_SESSION["user_link_item_switch_item"]['link_title'] = $menu_title;	
+	menu_link_save( $_SESSION["user_link_item_switch_item"]);	
+	return $menu_title_message;
+}
+
+/**
+ * Hide or show "chipingo settings" link
+ */
+function switch_user_link_item_publisher_chipingo() {	
+	if ( !isset($_SESSION["user_link_item_publisher_chipingo"]) ) {
+		 $result = db_select( 'menu_links', 'm' )
+				->fields('m')
+				->condition( 'link_path', 'publisher_chipingo' )
+				->execute()
+				->fetchAssoc();
+		$_SESSION["user_link_item_publisher_chipingo"] = menu_link_load( $result['mlid'] );
+	}	
+	if ( $_SESSION["user_view_mode"] == 'S' ) {
+		  $_SESSION["user_link_item_publisher_chipingo"]['hidden'] = 1; 
+	} else {
+		$_SESSION["user_link_item_publisher_chipingo"]['hidden'] = 0;
+	}
+	menu_link_save($_SESSION["user_link_item_publisher_chipingo"]);
+}
+
+
+/**
+ * Hides/shows and sets user menu titles and session variables regarding user view mode (simple or advanced)
+ * 
+ * @param type $form
+ * @param array $form_state
+ */
+function switch_view_mode($form, &$form_state) {
+	$menu_title_message = user_link_item_switch_view_mode();		
+	switch_user_link_item_publisher_chipingo();	
+	drupal_set_message( $menu_title_message );	
+	$form_state['redirect'] = 'home';
+}
+
+/**
+ * Returns current view mode
+ * 
+ * @return string
+ */
+function _getViewMode() {
+  if (isset($_SESSION["user_view_mode"])) {
+    return $_SESSION["user_view_mode"];
+  } else {
+    return 'S';
+  }
+}

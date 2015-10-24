@@ -1,0 +1,688 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  chipingo_library.inc: n/a
+#  chipingo_qtag_option_conf_api1.inc: n/a
+#  chipingo_qtag_question_conf_api1.inc: n/a
+#  menus_and_forms/content/session/detail_panel/block_forms.php: n/a
+#  menus_and_forms/content/qtag/menu_forms.php: n/a
+#  chipingo_qtag_api1.inc: n/a
+#  qtaq_options_api.inc: n/a
+#  menus_and_forms/content/chipingo/menu_forms.php: n/a
+#  menus_and_forms/content/chipingo/menu_forms2.php: n/a
+#  chipingo_qtag_session_api1.inc: n/a
+#  custom_files_in_other_drupal_folders/themes/bartik/templates/page.tpl.php: n/a
+#  chipingo_qtag_restriction_api1.inc: n/a
+#  menus_and_forms/content/session/menu_forms.php: n/a
+#  chipingo.module: n/a
+#  chipingo.info: n/a
+#  cassandra/chipingo_tables/QTagOptions.php: n/a
+#  drupal_entities/sil.inc: n/a
+#  menus_and_forms/content/chipingo/menu_items.php: n/a
+#  menus_and_forms/configuration/menu_forms.php: n/a
+#  menus_and_forms/content/chipingo/api.php: n/a
+#  menus_and_forms/sidebar/quick_chipingo_list/block_form.php: n/a
+#  menus_and_forms/content/qtag/menu_items.php: n/a
+#  menus_and_forms/content/session/api.php: n/a
+#  menus_and_forms/content/subscriptions/menu_forms.php: n/a
+#  menus_and_forms/content/subscriptions/menu_items.php: n/a
+#  menus_and_forms/header/search/menu_items.php: n/a
+#  menus_and_forms/sidebar/qtag_session_list/api.php: n/a
+#  menus_and_forms/sidebar/qtag_session_list/menu_items.php: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2015-06-14 00:26-0000\n"
+"PO-Revision-Date: 2015-06-14 00:27-0000\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: EMAIL@ADDRESS\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.1\n"
+
+#: chipingo_library.inc:225
+msgid "None."
+msgstr "Hiçbiri."
+
+#: chipingo_library.inc:250;256 chipingo_qtag_option_conf_api1.inc:9
+#: chipingo_qtag_question_conf_api1.inc:9
+msgid "Edit"
+msgstr "Düzenle"
+
+#: chipingo_library.inc:251;264
+#: menus_and_forms/content/session/detail_panel/block_forms.php:177
+msgid "Options"
+msgstr "Ayarlar"
+
+#: chipingo_library.inc:252;268
+msgid "Publish"
+msgstr "Yayımla"
+
+#: chipingo_library.inc:253;269 menus_and_forms/content/qtag/menu_forms.php:139
+msgid "Results"
+msgstr "Sonuçlar"
+
+#: chipingo_library.inc:254
+msgid "Delete QTag"
+msgstr "QTag'ı Sil"
+
+#: chipingo_library.inc:256 chipingo_qtag_api1.inc:66;193
+#: qtaq_options_api.inc:39;126
+#: menus_and_forms/content/chipingo/menu_forms.php:260
+#: menus_and_forms/content/session/detail_panel/block_forms.php:307
+msgid "Delete"
+msgstr "Sil"
+
+#: chipingo_library.inc:265
+#: menus_and_forms/content/session/detail_panel/block_forms.php:184
+msgid "Question Type"
+msgstr "Soru Türü"
+
+#: chipingo_library.inc:266
+#: menus_and_forms/content/session/detail_panel/block_forms.php:187
+msgid "Option Type"
+msgstr "Cevaplama Türü"
+
+#: chipingo_library.inc:267
+#: menus_and_forms/content/session/detail_panel/block_forms.php:190
+msgid "Restrictions"
+msgstr "Kısıtlamalar"
+
+#: chipingo_library.inc:271
+msgid "Delete Session"
+msgstr "Oturumu Sil"
+
+#: chipingo_library.inc:295;301
+#: menus_and_forms/content/chipingo/menu_forms.php:178
+msgid "Operations"
+msgstr "İşlemler"
+
+#: chipingo_library.inc:300
+#: menus_and_forms/content/session/detail_panel/block_forms.php:109
+msgid "Session Name"
+msgstr "Oturum Adı"
+
+#: chipingo_qtag_api1.inc:196
+msgid "Cancel deletion"
+msgstr "Silme işlemini iptal et"
+
+#: chipingo_qtag_api1.inc:209 chipingo_qtag_session_api1.inc:27
+msgid "QTag"
+msgstr "QTag"
+
+#: chipingo_qtag_api1.inc:209
+msgid "Successfully deleted"
+msgstr "Silme işlemi başarılı"
+
+#: chipingo_qtag_api1.inc:268 menus_and_forms/content/chipingo/menu_forms.php:41
+msgid "List"
+msgstr "Listele"
+
+#: chipingo_qtag_api1.inc:315;316
+msgid "Start date"
+msgstr "Başlangıç tarihi"
+
+#: chipingo_qtag_api1.inc:321;322;327
+msgid "End date"
+msgstr "Bitiş tarihi"
+
+#: chipingo_qtag_api1.inc:328
+msgid "Creation Date"
+msgstr "Oluşturma zamanı"
+
+#: chipingo_qtag_api1.inc:333
+msgid "Last change"
+msgstr "Son değişiklik"
+
+#: chipingo_qtag_api1.inc:334
+msgid "Last Change"
+msgstr "Son değişiklik"
+
+#: chipingo_qtag_option_conf_api1.inc:6 chipingo_qtag_question_conf_api1.inc:6
+#: custom_files_in_other_drupal_folders/themes/bartik/templates/page.tpl.php:93;94;105;110
+msgid "Home"
+msgstr "Ana Sayfa"
+
+#: chipingo_qtag_option_conf_api1.inc:8
+msgid "Option Configuration"
+msgstr "Cevaplama ayarları"
+
+#: chipingo_qtag_option_conf_api1.inc:42
+#: menus_and_forms/content/session/detail_panel/block_forms.php:216
+msgid "Option type"
+msgstr "Cevaplama türü"
+
+#: chipingo_qtag_option_conf_api1.inc:50
+msgid "Save Option Configuration"
+msgstr "Cevaplama Ayarlarını Kaydet"
+
+#: chipingo_qtag_option_conf_api1.inc:54 chipingo_qtag_question_conf_api1.inc:50
+#: chipingo_qtag_restriction_api1.inc:111
+#: menus_and_forms/content/session/menu_forms.php:88;233
+msgid "Cancel"
+msgstr "İptal"
+
+#: chipingo_qtag_option_conf_api1.inc:82 chipingo_qtag_question_conf_api1.inc:78
+#: chipingo_qtag_restriction_api1.inc:139
+msgid "Saved"
+msgstr "Kaydedildi"
+
+#: chipingo_qtag_question_conf_api1.inc:8
+msgid "Question Configuration"
+msgstr "Soru Ayarları"
+
+#: chipingo_qtag_question_conf_api1.inc:39
+#: menus_and_forms/content/session/detail_panel/block_forms.php:204
+msgid "Question type"
+msgstr "Soru türü"
+
+#: chipingo_qtag_question_conf_api1.inc:46
+msgid "Save Question Configuration"
+msgstr "Soru Ayarlarını Kaydet"
+
+#: chipingo_qtag_restriction_api1.inc:8
+msgid "Restriction Edit"
+msgstr "Kısıtlamaları Düzenle"
+
+#: chipingo_qtag_restriction_api1.inc:41
+#: menus_and_forms/content/session/detail_panel/block_forms.php:130;229
+msgid "Gender"
+msgstr "Cinsiyet"
+
+#: chipingo_qtag_restriction_api1.inc:49
+#: menus_and_forms/content/session/detail_panel/block_forms.php:132;249
+msgid "Language"
+msgstr "Dil"
+
+#: chipingo_qtag_restriction_api1.inc:57
+#: menus_and_forms/content/session/detail_panel/block_forms.php:133;257
+msgid "Country"
+msgstr "Ülke"
+
+#: chipingo_qtag_restriction_api1.inc:65
+msgid "City"
+msgstr "İlçe"
+
+#: chipingo_qtag_restriction_api1.inc:73
+#: menus_and_forms/content/session/detail_panel/block_forms.php:131;240
+msgid "Age"
+msgstr "Yaş"
+
+#: chipingo_qtag_restriction_api1.inc:88
+msgid "Save Restriction"
+msgstr "Kısıtlamaları Kaydet"
+
+#: chipingo_qtag_restriction_api1.inc:94
+msgid "Define \"Language\" restriction"
+msgstr "Dil Kısıtlamalarını Tanımla"
+
+#: chipingo_qtag_restriction_api1.inc:100
+msgid "Define \"Country\" restriction"
+msgstr "Ülke Kısıtlamalarını Tanımla"
+
+#: chipingo_qtag_restriction_api1.inc:106
+msgid "Define \"City\" restriction"
+msgstr "Şehir Kısıtlamalarını Tanımla"
+
+#: chipingo_qtag_session_api1.inc:33
+msgid "QTag Id"
+msgstr "QTag Numarası"
+
+#: chipingo_qtag_session_api1.inc:37
+msgid "Publish start date"
+msgstr "Yayın tarihi"
+
+#: chipingo_qtag_session_api1.inc:41
+msgid "Publish end date"
+msgstr "Yayın bitiş tarihi"
+
+#: chipingo_qtag_session_api1.inc:45
+msgid "Session Status"
+msgstr "Oturum durumu"
+
+#: chipingo_qtag_session_api1.inc:49
+msgid "Session Question Type"
+msgstr "Oturum soru türü"
+
+#: chipingo_qtag_session_api1.inc:53
+msgid "Session Option Type"
+msgstr "Oturum seçeneği türü"
+
+#: chipingo_qtag_session_api1.inc:59
+msgid "Go back"
+msgstr "Geri git"
+
+#: chipingo_qtag_session_api1.inc:128
+msgid "Session"
+msgstr "Oturum"
+
+#: chipingo_qtag_session_api1.inc:138
+msgid "Session Restriction Setting"
+msgstr "Oturum Kısıtlama Ayarları"
+
+#: chipingo_qtag_session_api1.inc:147
+msgid "Session Question Settings"
+msgstr "Oturum Soru Ayarları"
+
+#: chipingo_qtag_session_api1.inc:156
+msgid "Session Option Settings"
+msgstr "Oturum Cevap Seçenekleri Ayarları"
+
+#: qtaq_options_api.inc:9
+msgid "QTag Options"
+msgstr "QTag Cevap Seçenekleri"
+
+#: chipingo.module:46;49;57
+msgid "Upload Publisher Logo Image File"
+msgstr "Yayınci Logo'sunu Yükle"
+
+#: chipingo.module:60
+msgid "Upload Chipingo Logo Image File"
+msgstr "ChipInGo Logosu Yükle"
+
+#: chipingo.module:90;92
+msgid "Upload ChipInGo Image"
+msgstr "ChipInGo resmi yükle"
+
+#: chipingo.module:130
+msgid "Image"
+msgstr "Resim"
+
+#: chipingo.module:132
+msgid ""
+"The uploaded image will be displayed on this page using the image style "
+"choosen below."
+msgstr ""
+
+#: chipingo.module:187;351
+msgid "In Simple View now"
+msgstr "Basit görünümde"
+
+#: chipingo.module:241
+msgid "Quick ChipInGo & QTags List"
+msgstr "ChipInGo & QTag Hızlı Erişim"
+
+#: chipingo.module:249
+msgid "QTag Session List"
+msgstr "QTag Oturum Listesi"
+
+#: chipingo.module:257
+msgid "QTag Session Detail Panel"
+msgstr "QTag Oturum Detay Paneli"
+
+#: chipingo.module:265
+msgid "ChipInGo Content Ajax Region"
+msgstr ""
+
+#: chipingo.module:273
+msgid "ChipInGo Search Block"
+msgstr "ChipInGo Arama Bloğu"
+
+#: chipingo.module:350
+msgid "Switch to Advanced View"
+msgstr "Gelişmiş Arayüze Geçiş Yap"
+
+#: chipingo.module:350
+msgid "Switch to Simple View"
+msgstr "Basit Arayüze Geçiş Yap"
+
+#: chipingo.module:351
+msgid "In Advanced View now"
+msgstr "Gelişmiş görünümde"
+
+#: chipingo.info:0
+msgid "ChipInGo Module"
+msgstr "ChipInGo Modülü"
+
+#: chipingo.info:0
+msgid "Defines ChipInGo entities and blocks"
+msgstr ""
+
+#: chipingo.info:0 menus_and_forms/content/chipingo/menu_forms.php:160
+msgid "ChipInGo"
+msgstr "ChipInGo Modülü"
+
+#: cassandra/chipingo_tables/QTagOptions.php:163
+msgid "times chosen"
+msgstr "kere seçildi"
+
+#: custom_files_in_other_drupal_folders/themes/bartik/templates/page.tpl.php:135
+msgid "Main menu"
+msgstr "Ana menü"
+
+#: custom_files_in_other_drupal_folders/themes/bartik/templates/page.tpl.php:152
+msgid "Secondary menu"
+msgstr "İkincil menü"
+
+#: drupal_entities/sil.inc:142
+#: menus_and_forms/content/chipingo/menu_items.php:25
+msgid "Publisher & ChipInGo Settings"
+msgstr "Yayıncı & ChipInGo Ayarları"
+
+#: drupal_entities/sil.inc:146
+#: menus_and_forms/content/chipingo/menu_items.php:28
+msgid "Publisher & ChipInGo"
+msgstr "Yayıncı & ChipInGo"
+
+#: menus_and_forms/configuration/menu_forms.php:40
+msgid "Cassandra database nodes"
+msgstr "Cassandra veritabanı bilgisayarlari"
+
+#: menus_and_forms/configuration/menu_forms.php:46
+msgid "Node"
+msgstr ""
+
+#: menus_and_forms/configuration/menu_forms.php:52
+msgid "Save"
+msgstr "Kaydet"
+
+#: menus_and_forms/content/chipingo/api.php:41
+msgid "Chipingo parameter is mandatory"
+msgstr "ChipInGo alanını doldurmalısınız"
+
+#: menus_and_forms/content/chipingo/api.php:44
+msgid "qtag parameter is mandatory"
+msgstr "QTag alanını doldurmalısınız"
+
+#: menus_and_forms/content/chipingo/api.php:86
+msgid "chipingo_email parameter is mandatory"
+msgstr "ChipInGo e-posta alanını doldurmalısınız"
+
+#: menus_and_forms/content/chipingo/api.php:115
+msgid "Chipingo is mandatory"
+msgstr "ChipInGo alanını doldurmalısınız"
+
+#: menus_and_forms/content/chipingo/api.php:118
+msgid "Publisher is mandatory"
+msgstr "Yayınci alanını doldurmalısınız"
+
+#: menus_and_forms/content/chipingo/api.php:121
+msgid "E-mail is mandatory"
+msgstr "E-posta alanını doldurmalısınız"
+
+#: menus_and_forms/content/chipingo/api.php:125
+msgid "E-mail value is not valid"
+msgstr "E-posta geçerli değil"
+
+#: menus_and_forms/content/chipingo/api.php:151
+msgid "ChipInGo e-mail is mandatory"
+msgstr "E-posta alanını doldurmalısınız"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:37;81;166
+#: menus_and_forms/content/subscriptions/menu_forms.php:284
+#: menus_and_forms/sidebar/quick_chipingo_list/block_form.php:19
+msgid "Publisher"
+msgstr "Yayımcı"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:49
+msgid "Publisher and ChipInGos are listed here. You cannot delete those in use."
+msgstr "Yayımcı ve ChipInGo listesi. Kullanımda olanları silemezsiniz."
+
+#: menus_and_forms/content/chipingo/menu_forms.php:51
+msgid "Not verified"
+msgstr "Onaylanmamış"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:52
+msgid "Has published QTag"
+msgstr "Yayınlanmış QTag var"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:53
+msgid "Verified, has not published QTag"
+msgstr "Onaylanmış, yayınlanmış QTag yok"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:93
+msgid "e-mail"
+msgstr "e-posta"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:110
+#: menus_and_forms/content/session/detail_panel/block_forms.php:332
+msgid "Add"
+msgstr "Ekle"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:163
+msgid "Logo"
+msgstr "Resim"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:169
+msgid "E-Mail"
+msgstr "E-Posta"
+
+#: menus_and_forms/content/chipingo/menu_forms.php:172
+msgid "Status"
+msgstr "Durum"
+
+#: menus_and_forms/content/qtag/menu_forms.php:15
+msgid "QTag saved successfully"
+msgstr "QTag başarıyla kaydedildi"
+
+#: menus_and_forms/content/qtag/menu_forms.php:65
+msgid "Back"
+msgstr "Geri git"
+
+#: menus_and_forms/content/qtag/menu_forms.php:93
+msgid "Choose one of your valid ChipInGo"
+msgstr "Geçerli ChipInGo'larınızdan birini seçiniz"
+
+#: menus_and_forms/content/qtag/menu_forms.php:103;104;106
+msgid "Question"
+msgstr "Soru"
+
+#: menus_and_forms/content/qtag/menu_forms.php:127
+msgid "Publish ChipInGo"
+msgstr "Yayımla"
+
+#: menus_and_forms/content/qtag/menu_forms.php:150
+msgid "Delete Question"
+msgstr "Sil"
+
+#: menus_and_forms/content/qtag/menu_forms.php:161
+msgid "Save Question"
+msgstr "Kaydet"
+
+#: menus_and_forms/content/qtag/menu_forms.php:161
+msgid "Create a New Question"
+msgstr "Yeni bir QTag oluştur"
+
+#: menus_and_forms/content/qtag/menu_items.php:25;28
+msgid "Add a new Question"
+msgstr "Yeni bir QTag ekle"
+
+#: menus_and_forms/content/session/api.php:29
+msgid "Session saved"
+msgstr "Oturum Kaydedildi"
+
+#: menus_and_forms/content/session/menu_forms.php:62
+msgid " will be published. Please provide publish end date."
+msgstr "yayımlanacak. Lütfen yayın bitiş tarihi giriniz."
+
+#: menus_and_forms/content/session/menu_forms.php:68
+msgid "The time when voting is start"
+msgstr "Yayın başlangıç tarihi"
+
+#: menus_and_forms/content/session/menu_forms.php:74
+msgid "The time when voting is finished"
+msgstr "Yayın bitiş tarihi"
+
+#: menus_and_forms/content/session/menu_forms.php:82
+msgid "Confirm Publish"
+msgstr "Yayımı onayla"
+
+#: menus_and_forms/content/session/menu_forms.php:83
+msgid "Confirms and Publish the selected QTag and session"
+msgstr "Yayın işlemini onayla"
+
+#: menus_and_forms/content/session/menu_forms.php:89
+msgid "Cancel publication"
+msgstr "İptal"
+
+#: menus_and_forms/content/session/menu_forms.php:176;177
+msgid "Session status"
+msgstr "Oturum durumu"
+
+#: menus_and_forms/content/session/menu_forms.php:183;186
+msgid "Name of the session"
+msgstr "Oturum Adı"
+
+#: menus_and_forms/content/session/menu_forms.php:228
+msgid "Save Session"
+msgstr "Oturumu Kaydet"
+
+#: menus_and_forms/content/session/detail_panel/block_forms.php:124
+msgid "Question is in PUBLISHED MODE now."
+msgstr "Soru şu anda yayında."
+
+#: menus_and_forms/content/session/detail_panel/block_forms.php:127
+msgid "Restriction settings are as below."
+msgstr "Kısıtlama ayarları aşağıdaki gibidir"
+
+#: menus_and_forms/content/session/detail_panel/block_forms.php:148
+msgid "Save Restrictions"
+msgstr "Kısıtlamaları kaydet"
+
+#: menus_and_forms/content/session/detail_panel/block_forms.php:294
+msgid "Option"
+msgstr "Cevap"
+
+#: menus_and_forms/content/session/detail_panel/block_forms.php:319
+msgid "New Option"
+msgstr "Yeni cevap"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:68
+msgid "Your own option is selected. However, your option may match one of these"
+msgstr ""
+"Seçeneğiniz eklenecek ve işaretlenecektir. İşaretlemeden önce lütfen sizinki "
+"ile aynı olabilecek diğer seçenekleri inceleyiniz."
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:77
+msgid "Vote"
+msgstr "Oyla"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:91
+msgid "Cancel Voting"
+msgstr "Oylamayı iptal et"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:124
+msgid "Your options has been deleted"
+msgstr "Seçeneğiniz silindi."
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:156
+msgid "Chosing multiple options is not allowed"
+msgstr "Birden fazla seçenek işaretleyemezsiniz."
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:173
+msgid "Your reply saved"
+msgstr "Kaydedildi"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:175
+msgid "No option is chosed"
+msgstr "Cevap seçilmedi."
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:221
+msgid "There is no published ChipInGo"
+msgstr "Yayınlanmıi ChipInGo bulunmamaktadır"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:300
+msgid "published by"
+msgstr "tarafından yayınlanmış"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:302
+msgid "No published question at the moment"
+msgstr "Yayınlanmış ChipInGo yok"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:321
+msgid "Reply"
+msgstr "Cevapla"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:338
+msgid "Delete My Reply"
+msgstr "Seçeneğimi sil"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:356
+msgid "Unsubscribe"
+msgstr "Aboneliği iptal et"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:356
+msgid "Subscribe"
+msgstr "Abone ol"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:417
+msgid "Options provided by publisher"
+msgstr "Yayımcı tarafından sağlanan seçenekler"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:431
+msgid "There are no options provided by publisher"
+msgstr "Yayıncı tarafından sağlanan seçenek bulunmamaktadır."
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:446
+msgid "Provided by other voters"
+msgstr "Diğer kullanıcılar tarafından girilen seçenekler"
+
+#: menus_and_forms/content/subscriptions/menu_forms.php:458
+msgid "There are no options provided by other users"
+msgstr "Diğer kullanıcılar tarafından sağlanan seçenek bulunmamaktadır."
+
+#: menus_and_forms/content/subscriptions/menu_items.php:25;29
+#: menus_and_forms/header/search/menu_items.php:16
+msgid "Subscriptions"
+msgstr "Abonelikler"
+
+#: menus_and_forms/content/subscriptions/menu_items.php:38;42
+msgid "Show Alternatives"
+msgstr "Benzer diğer seçenekleri göster"
+
+#: menus_and_forms/header/search/block_forms.php:14
+msgid "Type your search text"
+msgstr "Arama kelimesi giriniz"
+
+#: menus_and_forms/header/search/menu_items.php:13
+msgid "Search Result"
+msgstr "Arama sonuçları"
+
+#: menus_and_forms/sidebar/qtag_session_list/api.php:42
+msgid "will be published on"
+msgstr "tarihinde yayınlandı"
+
+#: menus_and_forms/sidebar/qtag_session_list/menu_items.php:25
+msgid "Create a new Session"
+msgstr "Yeni Oturum Oluştur"
+
+#: menus_and_forms/sidebar/qtag_session_list/menu_items.php:33;41;49
+msgid "Session Settings"
+msgstr "Oturum Ayarları"
+
+#: menus_and_forms/sidebar/quick_chipingo_list/block_form.php:19
+msgid "Program"
+msgstr "Program"
+
+#~ msgid "$chipingo_email parameter is mandatory"
+#~ msgstr "ChipInGo e-posta alanını doldurmalısınız"
+
+#~ msgid "CHIPINGO"
+#~ msgstr "CHIPINGO"
+
+#~ msgid "LOGO"
+#~ msgstr "RESİM"
+
+#~ msgid "PUBLISHER"
+#~ msgstr "YAYIMCI"
+
+#~ msgid "EMAIL"
+#~ msgstr "E-POSTA"
+
+#~ msgid "STATUS"
+#~ msgstr "DURUM"
+
+#~ msgid "OPERATIONS"
+#~ msgstr "İŞLEMLER"
+
+#~ msgid "There is no published Chipingo"
+#~ msgstr "Yayınlanmış ChipInGo yok"
+
+#~ msgid "Options provided by"
+#~ msgstr "tarafından sağlanan seçenekler"
