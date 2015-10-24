@@ -4,7 +4,13 @@ A sad story.
 
 We, one of my friends and me, decided to develop a new application a year ago (January 2014). The intention was to develop an application to get people's ideas. We came to this idea because of the lack of some features of twitter app. As you know, twitter provides users a good environment to share their ideas but does not provide a way to count the amount of users who share the same idea or the other way. 
 
-I already developed first prototype of my application using these technologies; Apache Cassandra & MySQL as database layer, drupal as CMS and Apache Hadoop & Apache Pig for analyse tool.
+I already developed FIRST PROTOTYPE of my application using these technologies; 
+Apache Cassandra & MySQL as database layer, 
+Drupal as CMS,
+Apache Hadoop & Apache Pig for analyse tool, 
+Bootstrap framework and Apache Cordova for mobile framework, 
+Php cassandra driver (https://github.com/duoshuo/php-cassandra). 
+I also changed drupal 7.38 core user module in order to store user information in Cassandra database.
 
 Our target audience was going to be media companies and famous people such as TV channels, radio channels, journalist, goverment officals, artists, etc.
 
