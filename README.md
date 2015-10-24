@@ -1,8 +1,6 @@
 # chipingo
 
-A sad story
-
-Multilingual poll application 
+A sad story.
 
 We, one of my friends and me, decided to develop a new application a year ago (January 2014). The intention was to develop an application to get peoples's ideas. We came to this idea because of the lack of twitter app. As you know, twitter provides users a good environment to share their ideas but does not provide a way to count how many of users have same idea. 
 
